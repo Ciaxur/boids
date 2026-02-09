@@ -7,8 +7,13 @@ LINKER = -L"$(3RD_PARTY_PATH)/lib" -Wl,-rpath,"$(3RD_PARTY_PATH)/lib"
 run: app
 	./app
 
-app: main.o
+app: main.o boid.o
 	$(CC) $(FLAGS) $(INCLUDES) $(LINKER) $^ -o app
 
 main.o: ./src/main.cc
-	bear -- $(CC) $(FLAGS) $(INCLUDES) ./src/main.cc -c
+	$(CC) $(FLAGS) $(INCLUDES) ./src/main.cc -c
+
+boid.o: ./src/boid.h ./src/boid.cc
+	$(CC) $(FLAGS) $(INCLUDES) ./src/boid.cc -c
+
+
